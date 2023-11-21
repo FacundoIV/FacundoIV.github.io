@@ -30,16 +30,20 @@
             margin-bottom: 20px;
         }
 
+        #anuncios-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
         .anuncio {
             border: 1px solid #ddd;
             padding: 15px;
-            margin-bottom: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: inline-block;
             text-align: left;
-            max-width: 90%;
         }
     </style>
 </head>
