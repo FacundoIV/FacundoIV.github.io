@@ -1,7 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuncios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .anuncio {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+    <h1>¡Bienvenido a la Plataforma de Anuncios!</h1>
+
+    <p>Aquí puedes publicar tus anuncios por $1. Simplemente sigue las instrucciones en el README.md para agregar tu anuncio.</p>
+
+    <h2>Anuncios Disponibles:</h2>
+
+    <div id="anuncios-container">
+        <!-- Espacios para anuncios se agregarán aquí -->
+    </div>
+
+    <script>
+        // Puedes cargar los anuncios dinámicamente desde un archivo o base de datos aquí
+        for (let i = 1; i <= 100; i++) {
+            document.getElementById('anuncios-container').innerHTML += `
+                <div class="anuncio">
+                    <h3>Anuncio ${i}</h3>
+                    <p>Descripción del anuncio ${i}. Precio: $1</p>
+                </div>
+            `;
+        }
+    </script>
+
 </body>
 </html>
