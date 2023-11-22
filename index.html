@@ -44,6 +44,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: left;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -62,12 +63,12 @@
             <!-- Espacios para anuncios se agregarán aquí -->
         </div>
 
-        <script src="https://www.paypal.com/sdk/js?client-id=MBPQRE9F5LTGG"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
         <script>
             // Puedes cargar los anuncios dinámicamente desde un archivo o base de datos aquí
             for (let i = 1; i <= 100; i++) {
                 document.getElementById('anuncios-container').innerHTML += `
-                    <div class="anuncio">
+                    <div class="anuncio" onclick="iniciarPago(${i})">
                         <h3>Anuncio ${i}</h3>
                         <p>Descripción del anuncio ${i}. Precio: $1</p>
                         <div id="paypal-button-container-${i}"></div>
@@ -92,6 +93,12 @@
                         });
                     }
                 }).render(`#paypal-button-container-${i}`);
+            }
+
+            function iniciarPago(anuncioNumero) {
+                // Redirigir al usuario al proceso de pago de PayPal
+                // Puedes personalizar esto según tus necesidades
+                window.location.href = `https://www.paypal.com/iniciar-pago-para-anuncio-${anuncioNumero}`;
             }
         </script>
 
