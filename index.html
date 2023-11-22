@@ -44,7 +44,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: left;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -63,50 +62,36 @@
             <!-- Espacios para anuncios se agregarán aquí -->
         </div>
 
-        <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID" onload="inicializarBotonesPaypal()"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
         <script>
-            function inicializarBotonesPaypal() {
-                // Puedes cargar los anuncios dinámicamente desde un archivo o base de datos aquí
-                for (let i = 1; i <= 100; i++) {
-                    // Crear un nuevo div para cada anuncio
-                    var nuevoAnuncio = document.createElement('div');
-                    nuevoAnuncio.className = 'anuncio';
-                    nuevoAnuncio.innerHTML = `
+            // Puedes cargar los anuncios dinámicamente desde un archivo o base de datos aquí
+            for (let i = 1; i <= 100; i++) {
+                document.getElementById('anuncios-container').innerHTML += `
+                    <div class="anuncio">
                         <h3>Anuncio ${i}</h3>
                         <p>Descripción del anuncio ${i}. Precio: $1</p>
                         <div id="paypal-button-container-${i}"></div>
-                    `;
+                    </div>
+                `;
 
-                    // Agregar el nuevo anuncio al contenedor
-                    document.getElementById('anuncios-container').appendChild(nuevoAnuncio);
-                }
-
-                // Inicializar los botones de PayPal después de agregar todos los anuncios
-                for (let i = 1; i <= 100; i++) {
-                    paypal.Buttons({
-                        createOrder: function(data, actions) {
-                            return actions.order.create({
-                                purchase_units: [{
-                                    amount: {
-                                        value: '1.00'
-                                    }
-                                }]
-                            });
-                        },
-                        onApprove: function(data, actions) {
-                            return actions.order.capture().then(function(details) {
-                                alert('Pago completado por ' + details.payer.name.given_name + '!');
-                                // Aquí puedes agregar la lógica para permitir la publicación del anuncio
-                            });
-                        }
-                    }).render(`#paypal-button-container-${i}`);
-                }
-            }
-
-            function iniciarPago(anuncioNumero) {
-                // Redirigir al usuario al proceso de pago de PayPal
-                // Puedes personalizar esto según tus necesidades
-                window.location.href = `https://www.paypal.com/iniciar-pago-para-anuncio-${anuncioNumero}`;
+                // Inicializar el botón de PayPal para cada anuncio
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: '1.00'
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            alert('Pago completado por ' + details.payer.name.given_name + '!');
+                            // Aquí puedes agregar la lógica para permitir la publicación del anuncio
+                        });
+                    }
+                }).render(`#paypal-button-container-${i}`);
             }
         </script>
 
