@@ -51,7 +51,7 @@
 
     <header>
         <h1>¡Bienvenido a la Plataforma de Anuncios!</h1>
-        <p>Aquí puedes publicar tus anuncios. Sigue las instrucciones en el README.md para agregar tu anuncio.</p>
+        <p>Aquí puedes publicar tus anuncios por $1. Simplemente sigue las instrucciones en el README.md para agregar tu anuncio.</p>
     </header>
 
     <main>
@@ -63,20 +63,15 @@
         </div>
 
         <script>
-            function inicializarAnuncios() {
-                // Puedes cargar los anuncios dinámicamente desde un archivo o base de datos aquí
-                for (let i = 1; i <= 100; i++) {
-                    document.getElementById('anuncios-container').innerHTML += `
-                        <div class="anuncio" id="anuncio-${i}">
-                            <h3>Anuncio ${i}</h3>
-                            <p>Descripción del anuncio ${i}. Precio: $1</p>
-                        </div>
-                    `;
-                }
+            // Puedes cargar los anuncios dinámicamente desde un archivo o base de datos aquí
+            for (let i = 1; i <= 100; i++) {
+                document.getElementById('anuncios-container').innerHTML += `
+                    <div class="anuncio">
+                        <h3>Anuncio ${i}</h3>
+                        <p>Descripción del anuncio ${i}. Precio: $1</p>
+                    </div>
+                `;
             }
-
-            // Inicializar los anuncios al cargar la página
-            inicializarAnuncios();
         </script>
 
     </main>
