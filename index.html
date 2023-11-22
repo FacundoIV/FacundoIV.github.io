@@ -62,19 +62,27 @@
             <!-- Espacios para anuncios se agregarán aquí -->
         </div>
 
-        <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID" onload="inicializarAnuncios()"></script>
         <script>
-            // Puedes cargar los anuncios dinámicamente desde un archivo o base de datos aquí
-            for (let i = 1; i <= 100; i++) {
-                document.getElementById('anuncios-container').innerHTML += `
-                    <div class="anuncio">
-                        <h3>Anuncio ${i}</h3>
-                        <p>Descripción del anuncio ${i}. Precio: $1</p>
-                        <div id="paypal-button-container-${i}"></div>
-                    </div>
-                `;
+            function inicializarAnuncios() {
+                // Puedes cargar los anuncios dinámicamente desde un archivo o base de datos aquí
+                for (let i = 1; i <= 100; i++) {
+                    document.getElementById('anuncios-container').innerHTML += `
+                        <div class="anuncio" id="anuncio-${i}">
+                            <h3>Anuncio ${i}</h3>
+                            <p>Descripción del anuncio ${i}. Precio: $1</p>
+                            <div id="paypal-button-container-${i}"></div>
+                        </div>
+                    `;
+                }
 
-                // Inicializar el botón de PayPal para cada anuncio
+                // Inicializar los botones de PayPal después de agregar todos los anuncios
+                for (let i = 1; i <= 100; i++) {
+                    inicializarBotonPaypal(i);
+                }
+            }
+
+            function inicializarBotonPaypal(anuncioNumero) {
                 paypal.Buttons({
                     createOrder: function(data, actions) {
                         return actions.order.create({
@@ -91,7 +99,7 @@
                             // Aquí puedes agregar la lógica para permitir la publicación del anuncio
                         });
                     }
-                }).render(`#paypal-button-container-${i}`);
+                }).render(`#paypal-button-container-${anuncioNumero}`);
             }
         </script>
 
